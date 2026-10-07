@@ -1,0 +1,75 @@
+name: PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  title:
+    name: Conventional PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        shell: bash
+        run: |
+          pattern='^(feat|fix|docs|chore|refactor|test|ci|build|perf|revert)(\([^)]+\))?(!)?: .+'
+
+          if [[ ! "$PR_TITLE" =~ $pattern ]]; then
+            echo "PR title must use Conventional Commits."
+            echo
+            echo "Examples:"
+            echo "  feat: add Gemini models"
+            echo "  fix: correct Vertex endpoint"
+            echo "  chore: update Pi version"
+            exit 1
+          fi
+
+  validate-mixin:
+    name: Validate pi-gcp
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Validate pi-gcp
+        run: |
+          docker buildx build ./kits/pi-gcp \
+            -f ./kits/pi-gcp/pi-gcp.yaml \
+            --platform linux/amd64,linux/arm64 \
+            --output type=cacheonly
+
+  validate-set:
+    name: Validate composed set
+    runs-on: ubuntu-latest
+
+    # A Release Please PR points at the NEXT pi-gcp version.
+    # That version is intentionally not published until the PR is merged,
+    # so resolving the set would fail during that PR.
+    if: ${{ !startsWith(github.head_ref, 'release-please--') }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Validate set
+        run: |
+          docker buildx build ./sets/pi-gcp-dev \
+            -f ./sets/pi-gcp-dev/pi-gcp-dev.yaml \
+            --platform linux/arm64 \
+            --output type=cacheonly
