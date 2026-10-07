@@ -13,10 +13,7 @@ args:
     required: true
     description: GCP project containing the Vertex models
 
-  qwenLocation:
-    default: us-central1
-
-  glmLocation:
+  location:
     default: global
 
 capabilities:
@@ -34,7 +31,7 @@ capabilities:
             {
               "providers": {
                 "gcp-oss-maas": {
-                  "baseUrl": "https://aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.qwenLocation }}/endpoints/openapi",
+                  "baseUrl": "https://aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.location }}/endpoints/openapi",
                   "api": "openai-completions",
                   "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
                   "authHeader": true,
@@ -64,7 +61,6 @@ capabilities:
     config:
       runtime:
         allow:
-          - us-central1-aiplatform.googleapis.com
           - aiplatform.googleapis.com
 
   # --------------------------------------
@@ -82,10 +78,6 @@ capabilities:
         proxyManaged: true
 
         inject:
-          - domain: us-central1-aiplatform.googleapis.com
-            header: Authorization
-            format: "Bearer %s"
-
           - domain: aiplatform.googleapis.com
             header: Authorization
             format: "Bearer %s"
