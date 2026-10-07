@@ -1,0 +1,102 @@
+# syntax=docker/sandbox-kit:3
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/sandbox-kit-spec/main/schema/kit.schema.json
+
+schemaVersion: "3"
+kind: mixin
+
+displayName: Pi GCP Models
+description: Adds GCP-hosted models to Pi through Vertex AI
+version: "0.1.0"
+
+args:
+  project:
+    required: true
+    description: GCP project containing the Vertex models
+
+  qwenLocation:
+    default: us-central1
+
+  glmLocation:
+    default: global
+
+capabilities:
+  # --------------------------------------
+  # models.json
+  # --------------------------------------
+
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      files:
+        - path: "${{ kit.env.HOME }}/.pi/agent/models.json"
+          mode: "0644"
+          overwrite: false
+          content: |
+            {
+              "providers": {
+
+                "vertex-qwen": {
+                  "baseUrl": "https://${{ kit.args.qwenLocation }}-aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.qwenLocation }}/endpoints/openapi",
+
+                  "api": "openai-completions",
+                  "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
+                  "authHeader": true,
+
+                  "models": [
+                    {
+                      "id": "qwen/...",
+                      "name": "Qwen"
+                    }
+                  ]
+                },
+
+                "vertex-glm": {
+                  "baseUrl": "...",
+
+                  "api": "openai-completions",
+                  "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
+                  "authHeader": true,
+
+                  "models": [
+                    {
+                      "id": "glm-...",
+                      "name": "GLM"
+                    }
+                  ]
+                }
+
+              }
+            }
+
+  # --------------------------------------
+  # Vertex network access
+  # --------------------------------------
+
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      runtime:
+        allow:
+          - us-central1-aiplatform.googleapis.com
+          - aiplatform.googleapis.com
+
+  # --------------------------------------
+  # GCP authentication
+  # --------------------------------------
+
+  - type: com.docker.sandbox/credential@1
+    description: Google Cloud Vertex AI
+    config:
+      service: gcp-vertex
+      phase: runtime
+
+      apiKey:
+        name: GCP_VERTEX_ACCESS_TOKEN
+        proxyManaged: true
+
+        inject:
+          - domain: us-central1-aiplatform.googleapis.com
+            header: Authorization
+            format: "Bearer %s"
+
+          - domain: aiplatform.googleapis.com
+            header: Authorization
+            format: "Bearer %s"
