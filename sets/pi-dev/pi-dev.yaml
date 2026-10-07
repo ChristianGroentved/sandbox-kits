@@ -17,7 +17,7 @@ args:
 kits:
   - ref: docker.io/docker/sbx-kit-pi:<PINNED_VERSION>
 
-  - ref: ghcr.io/<github-user>/sbx-kit-pi-gcp:0.1.0
+  - ref: ghcr.io/christianhkb/sbx-kit-pi-gcp:0.1.0
     args:
       project: "${{ kit.args.project }}"
       location: "${{ kit.args.location }}"
