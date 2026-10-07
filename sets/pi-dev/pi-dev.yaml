@@ -1,0 +1,27 @@
+# syntax=docker/sandbox-kit:3
+schemaVersion: "3"
+
+kind: set
+displayName: Pi GCP Development Environment
+version: "0.1.0"
+
+args:
+  project:
+    required: true
+    description: GCP project used for Vertex AI
+
+  location:
+    default: global
+    description: Vertex AI endpoint location
+
+kits:
+  - ref: docker.io/docker/sbx-kit-pi:<PINNED_VERSION>
+
+  - ref: ghcr.io/<github-user>/sbx-kit-pi-gcp:0.1.0
+    args:
+      project: "${{ kit.args.project }}"
+      location: "${{ kit.args.location }}"
+
+  - ref: docker.io/docker/sbx-kit-github-ssh:1.0.0
+
+  - ref: docker.io/docker/sbx-kit-git-ssh-sign:1.0.0

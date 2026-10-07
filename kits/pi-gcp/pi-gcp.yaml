@@ -15,6 +15,7 @@ args:
 
   location:
     default: global
+    description: Vertex AI endpoint location
 
 capabilities:
   # --------------------------------------
