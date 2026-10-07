@@ -33,37 +33,26 @@ capabilities:
           content: |
             {
               "providers": {
-
-                "vertex-qwen": {
-                  "baseUrl": "https://${{ kit.args.qwenLocation }}-aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.qwenLocation }}/endpoints/openapi",
-
+                "gcp-oss-maas": {
+                  "baseUrl": "https://aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.qwenLocation }}/endpoints/openapi",
                   "api": "openai-completions",
                   "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
                   "authHeader": true,
-
                   "models": [
                     {
-                      "id": "qwen/...",
-                      "name": "Qwen"
-                    }
-                  ]
-                },
-
-                "vertex-glm": {
-                  "baseUrl": "...",
-
-                  "api": "openai-completions",
-                  "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
-                  "authHeader": true,
-
-                  "models": [
+                      "id": "qwen/qwen3-next-80b-a3b-thinking-maas",
+                      "displayName": "Qwen 3 Next 80B Thinking (Vertex MaaS)"
+                    },
                     {
-                      "id": "glm-...",
-                      "name": "GLM"
+                      "id": "zai-org/glm-5.2-maas",
+                      "displayName": "GLM 5.2 (Vertex MaaS)"
+                    },
+                    {
+                      "id": "zai-org/glm-5-maas",
+                      "displayName": "GLM 5 (Vertex MaaS)"
                     }
                   ]
                 }
-
               }
             }
 
