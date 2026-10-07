@@ -1,0 +1,13 @@
+schemaVersion: "1"
+
+name: pi-gcp-dev
+
+agent: pi
+
+kits:
+  - source: ./kits/pi
+
+  - source: ./kits/pi-gcp
+    args:
+      project: dcp-sandbox-pub-dev-d160
+      location: global
