@@ -47,7 +47,9 @@ capabilities:
                     },
                     {
                       "id": "qwen/qwen3-coder-480b-a35b-instruct-maas",
-                      "displayName": "Qwen 3 Coder 480B Instruct (Agent Platform MaaS)"
+                      "displayName": "Qwen 3 Coder 480B Instruct (Agent Platform MaaS)",
+                      "contextWindow": 258000,
+                      "cost": {"input": 0.2, "output": 1.62, "cacheRead": 0.02}
                     },
                     {
                       "id": "zai-org/glm-5.2-maas",
