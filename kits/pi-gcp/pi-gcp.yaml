@@ -5,17 +5,17 @@ schemaVersion: "3"
 kind: mixin
 
 displayName: Pi GCP Models
-description: Adds GCP-hosted models to Pi through Vertex AI
+description: Adds GCP-hosted models to Pi through Agent Platform AI
 version: "0.1.0" # x-release-please-version
 
 args:
   project:
     required: true
-    description: GCP project containing the Vertex models
+    description: GCP project containing the Agent Platform models
 
   location:
     default: global
-    description: Vertex AI endpoint location
+    description: Agent Platform AI endpoint location
 
 capabilities:
   # --------------------------------------
@@ -39,15 +39,35 @@ capabilities:
                   "models": [
                     {
                       "id": "qwen/qwen3-next-80b-a3b-thinking-maas",
-                      "displayName": "Qwen 3 Next 80B Thinking (Vertex MaaS)"
+                      "displayName": "Qwen 3 Next 80B Thinking (Agent Platform MaaS)"
+                    },
+                    {
+                      "id": "qwen/qwen3-next-80b-a3b-instruct-maas",
+                      "displayName": "Qwen 3 Next 80B Instruct (Agent Platform MaaS)"
+                    },
+                    {
+                      "id": "qwen/qwen3-coder-480b-a35b-instruct-maas",
+                      "displayName": "Qwen 3 Coder 480B Instruct (Agent Platform MaaS)"
                     },
                     {
                       "id": "zai-org/glm-5.2-maas",
-                      "displayName": "GLM 5.2 (Vertex MaaS)"
+                      "displayName": "GLM 5.2 (Agent Platform MaaS)"
                     },
                     {
                       "id": "zai-org/glm-5-maas",
-                      "displayName": "GLM 5 (Vertex MaaS)"
+                      "displayName": "GLM 5 (Agent Platform MaaS)"
+                    },
+                    {
+                      "id": "deepseek-ai/deepseek-v3.2-maas",
+                      "displayName": "Deepseek v3.2 (Agent Platform MaaS)"
+                    },
+                    {
+                      "id": "moonshotai/kimi-k2-thinking-maas",
+                      "displayName": "Kimi K2 Thinking (Agent Platform MaaS)"
+                    },
+                    {
+                      "id": "moonshotai/minimaxai/minimax-m2-maas",
+                      "displayName": "Minimax M2 (Agent Platform MaaS)"
                     }
                   ]
                 }
@@ -55,7 +75,7 @@ capabilities:
             }
 
   # --------------------------------------
-  # Vertex network access
+  # Agent Platform network access
   # --------------------------------------
 
   - type: com.docker.sandbox/network-policy@1
@@ -69,7 +89,7 @@ capabilities:
   # --------------------------------------
 
   - type: com.docker.sandbox/credential@1
-    description: Google Cloud Vertex AI
+    description: Google Cloud Agent Platform AI
     config:
       service: gcp-vertex
       phase: runtime
