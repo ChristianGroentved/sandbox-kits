@@ -40,11 +40,13 @@ capabilities:
                     {
                       "id": "qwen/qwen3-next-80b-a3b-thinking-maas",
                       "displayName": "Qwen 3 Next 80B Thinking (Agent Platform MaaS)",
+                      "contextWindow": 262144,
                       "cost": {"input": 0.15, "output": 1.2}
                     },
                     {
                       "id": "qwen/qwen3-next-80b-a3b-instruct-maas",
                       "displayName": "Qwen 3 Next 80B Instruct (Agent Platform MaaS)",
+                      "contextWindow": 262144,
                       "cost": {"input": 0.15, "output": 1.2}
                     },
                     {
@@ -62,21 +64,25 @@ capabilities:
                     {
                       "id": "zai-org/glm-5-maas",
                       "displayName": "GLM 5 (Agent Platform MaaS)",
+                      "contextWindow": 200000,
                       "cost": {"input": 1, "output": 3.2, "cacheRead": 0.1}
                     },
                     {
                       "id": "deepseek-ai/deepseek-v3.2-maas",
                       "displayName": "Deepseek v3.2 (Agent Platform MaaS)",
+                      "contextWindow": 163840,
                       "cost": {"input": 0.56, "output": 1.68, "cacheRead": 0.056}
                     },
                     {
                       "id": "moonshotai/kimi-k2-thinking-maas",
                       "displayName": "Kimi K2 Thinking (Agent Platform MaaS)",
+                      "contextWindow": 262144,
                       "cost": {"input": 0.6, "output": 2.5, "cacheRead": 0.06}
                     },
                     {
                       "id": "moonshotai/minimaxai/minimax-m2-maas",
                       "displayName": "Minimax M2 (Agent Platform MaaS)",
+                      "contextWindow": 196608,
                       "cost": {"input": 0.3, "output": 1.2, "cacheRead": 0.03}
                     }
                   ]
