@@ -14,8 +14,17 @@ args:
     default: global
     description: Vertex AI endpoint location
 
+  version:
+    default: "1.1.0"
+    pattern: '^([0-9]+\.[0-9]+\.[0-9]+|latest)$'
+    description: Pi release to install (e.g. 1.1.0, or latest)
+
 kits:
   - ref: docker.io/docker/sbx-kit-pi:latest
+
+  - ref: docker.io/christianhkb/sbx-kit-pi-version:0.1.0 # x-release-please-version
+    args:
+      version: "${{ kit.args.version }}"
 
   - ref: docker.io/christianhkb/sbx-kit-pi-gcp:0.1.0 # x-release-please-version
     args:
