@@ -52,6 +52,23 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             --output type=cacheonly
 
+  validate-pi-version:
+    name: Validate pi-version
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Validate pi-version
+        run: |
+          docker buildx build ./kits/pi-version \
+            -f ./kits/pi-version/pi-version.yaml \
+            --platform linux/amd64,linux/arm64 \
+            --output type=cacheonly
+
   validate-set:
     name: Validate composed set
     runs-on: ubuntu-latest

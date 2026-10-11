@@ -72,6 +72,37 @@ jobs:
           echo "Published pi-gcp could not be resolved"
           exit 1
 
+      - name: Publish pi-version
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          IMAGE: docker.io/${{ vars.DOCKERHUB_USERNAME }}/sbx-kit-pi-version
+        run: |
+          docker buildx build ./kits/pi-version \
+            -f ./kits/pi-version/pi-version.yaml \
+            --platform linux/amd64,linux/arm64 \
+            --push \
+            -t "${IMAGE}:${VERSION}" \
+            -t "${IMAGE}:latest"
+
+      - name: Verify pi-version is available
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          IMAGE: docker.io/${{ vars.DOCKERHUB_USERNAME }}/sbx-kit-pi-version
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if docker buildx imagetools inspect "${IMAGE}:${VERSION}" >/dev/null 2>&1; then
+              exit 0
+            fi
+
+            echo "Waiting for Docker Hub..."
+            sleep 5
+          done
+
+          echo "Published pi-version could not be resolved"
+          exit 1
+
       - name: Publish Pi GCP development set
         if: ${{ steps.release.outputs.release_created == 'true' }}
         env:
