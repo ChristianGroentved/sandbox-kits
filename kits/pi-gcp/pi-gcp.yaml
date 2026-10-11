@@ -92,14 +92,6 @@ capabilities:
                       "input": ["text"],
                       "contextWindow": 262144,
                       "cost": {"input": 0.6, "output": 2.5, "cacheRead": 0.06, "cacheWrite": 0.6}
-                    },
-                    {
-                      "id": "moonshotai/minimaxai/minimax-m2-maas",
-                      "displayName": "Minimax M2 (Agent Platform MaaS)",
-                      "reasoning": true,
-                      "input": ["text"],
-                      "contextWindow": 196608,
-                      "cost": {"input": 0.3, "output": 1.2, "cacheRead": 0.03, "cacheWrite": 0.3}
                     }
                   ]
                 }
