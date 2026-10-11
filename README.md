@@ -31,6 +31,11 @@ Register the dynamic sandbox secret:
 The access token is resolved on the host and is never exposed
 inside the sandbox.
 
+## Pi Version
+
+Installs a chosen Pi release over the one baked into the published Pi
+workload. See [kits/pi-version](kits/pi-version/README.md).
+
 ## Testing before release
 
 Pull requests are automatically validated to ensure the Sandbox Kit descriptors can be built and composed correctly.
