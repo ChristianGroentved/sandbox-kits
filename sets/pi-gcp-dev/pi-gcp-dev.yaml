@@ -14,14 +14,8 @@ args:
     default: global
     description: Vertex AI endpoint location
 
-  version:
-    default: latest
-    description: Version of Pi
-
 kits:
   - ref: docker.io/docker/sbx-kit-pi:latest
-    args:
-      version: "${{ kit.args.version }}"
 
   - ref: docker.io/christianhkb/sbx-kit-pi-gcp:0.1.0 # x-release-please-version
     args:
