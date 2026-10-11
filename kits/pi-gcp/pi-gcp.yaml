@@ -43,7 +43,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 262144,
-                      "cost": {"input": 0.15, "output": 1.2}
+                      "cost": {"input": 0.15, "output": 1.2, "cacheRead": 0, "cacheWrite": 0}
                     },
                     {
                       "id": "qwen/qwen3-next-80b-a3b-instruct-maas",
@@ -51,7 +51,7 @@ capabilities:
                       "reasoning": false,
                       "input": ["text"],
                       "contextWindow": 262144,
-                      "cost": {"input": 0.15, "output": 1.2}
+                      "cost": {"input": 0.15, "output": 1.2, "cacheRead": 0, "cacheWrite": 0}
                     },
                     {
                       "id": "qwen/qwen3-coder-480b-a35b-instruct-maas",
@@ -59,7 +59,7 @@ capabilities:
                       "reasoning": false,
                       "input": ["text"],
                       "contextWindow": 258000,
-                      "cost": {"input": 0.2, "output": 1.62, "cacheRead": 0.02}
+                      "cost": {"input": 0.2, "output": 1.62, "cacheRead": 0.02, "cacheWrite": 0.2}
                     },
                     {
                       "id": "zai-org/glm-5.2-maas",
@@ -67,7 +67,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 1000000,
-                      "cost": {"input": 1.4, "output": 4.4, "cacheRead": 0.14}
+                      "cost": {"input": 1.4, "output": 4.4, "cacheRead": 0.14, "cacheWrite": 1.4}
                     },
                     {
                       "id": "zai-org/glm-5-maas",
@@ -75,7 +75,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 200000,
-                      "cost": {"input": 1, "output": 3.2, "cacheRead": 0.1}
+                      "cost": {"input": 1, "output": 3.2, "cacheRead": 0.1, "cacheWrite": 1}
                     },
                     {
                       "id": "deepseek-ai/deepseek-v3.2-maas",
@@ -83,7 +83,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 163840,
-                      "cost": {"input": 0.56, "output": 1.68, "cacheRead": 0.056}
+                      "cost": {"input": 0.56, "output": 1.68, "cacheRead": 0.056, "cacheWrite": 0.56}
                     },
                     {
                       "id": "moonshotai/kimi-k2-thinking-maas",
@@ -91,7 +91,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 262144,
-                      "cost": {"input": 0.6, "output": 2.5, "cacheRead": 0.06}
+                      "cost": {"input": 0.6, "output": 2.5, "cacheRead": 0.06, "cacheWrite": 0.6}
                     },
                     {
                       "id": "moonshotai/minimaxai/minimax-m2-maas",
@@ -99,7 +99,7 @@ capabilities:
                       "reasoning": true,
                       "input": ["text"],
                       "contextWindow": 196608,
-                      "cost": {"input": 0.3, "output": 1.2, "cacheRead": 0.03}
+                      "cost": {"input": 0.3, "output": 1.2, "cacheRead": 0.03, "cacheWrite": 0.3}
                     }
                   ]
                 }
