@@ -1,0 +1,49 @@
+# syntax=docker/sandbox-kit:3
+# yaml-language-server: $schema=https://raw.githubusercontent.com/docker/sandbox-kit-spec/main/schema/kit.schema.json
+
+schemaVersion: "3"
+kind: mixin
+
+displayName: Pi Version
+description: Installs a chosen Pi release over the one baked into the Pi workload
+version: "0.1.0" # x-release-please-version
+
+# A runtime arg rather than a buildArg: the published Pi workload bakes its
+# version at publish time and exposes no arg, so the pin is applied by an
+# install hook when the sandbox is created.
+args:
+  version:
+    required: true
+    pattern: '^([0-9]+\.[0-9]+\.[0-9]+|latest)$'
+    description: Pi release to install (e.g. 0.86.1, or latest)
+
+capabilities:
+  # The install hook downloads the package from npm. The Pi workload already
+  # grants registry.npmjs.org at runtime, but install is a separate phase.
+  - type: com.docker.sandbox/network-policy@1
+    config:
+      install:
+        allow:
+          - registry.npmjs.org
+
+  - type: com.docker.sandbox/lifecycle@1
+    config:
+      install:
+        # Skips the download when the baked Pi already is the requested
+        # release. Runs as the agent user because the global npm prefix is
+        # agent-owned in the Pi image. Hook environments are deny-by-default,
+        # so NPM_CONFIG_PREFIX (the image's global prefix; without it npm
+        # falls back to the root-owned /usr/local) and the proxy variables npm
+        # reads are passed through explicitly.
+        - command: |
+            set -eu
+            want="${{ kit.args.version }}"
+            if [ "$want" != latest ] && pi --version 2>/dev/null | grep -qxF "$want"; then
+              echo "Pi $want already installed"
+              exit 0
+            fi
+            npm install -g "@earendil-works/pi-coding-agent@$want"
+            pi --version
+          user: "1000"
+          env: [NPM_CONFIG_PREFIX, HTTP_PROXY, HTTPS_PROXY, NODE_EXTRA_CA_CERTS, SSL_CERT_FILE]
+          description: Install the requested Pi release
