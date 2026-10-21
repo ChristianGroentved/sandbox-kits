@@ -12,6 +12,10 @@
         },
         {
           "type": "generic",
+          "path": "kits/pi-version/pi-version.yaml"
+        },
+        {
+          "type": "generic",
           "path": "sets/pi-gcp-dev/pi-gcp-dev.yaml"
         }
       ]
