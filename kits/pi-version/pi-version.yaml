@@ -6,7 +6,7 @@ kind: mixin
 
 displayName: Pi Version
 description: Installs a chosen Pi release over the one baked into the Pi workload
-version: "0.1.0" # x-release-please-version
+version: "0.2.0" # x-release-please-version
 
 # A runtime arg rather than a buildArg: the published Pi workload bakes its
 # version at publish time and exposes no arg, so the pin is applied by an
