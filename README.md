@@ -36,6 +36,23 @@ inside the sandbox.
 Installs a chosen Pi release over the one baked into the published Pi
 workload. See [kits/pi-version](kits/pi-version/README.md).
 
+## Running from published Docker images
+
+When you are not building the kit locally and instead rely on the published
+Docker images, point `sbx run` directly at the kit image and supply any kit
+arguments it expects:
+
+```bash
+sbx run \
+  docker.io/christianhkb/sbx-kit-pi-gcp-dev:0.2.0 \
+  --kit-arg project=dcp-sandbox-pub-dev-d160 \
+  --kit-arg version=1.4.0 \
+  .
+```
+
+Replace the image tag, `project`, and `version` values with the ones that match
+the release and GCP project you want to use.
+
 ## Testing before release
 
 Pull requests are automatically validated to ensure the Sandbox Kit descriptors can be built and composed correctly.
