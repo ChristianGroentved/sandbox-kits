@@ -76,7 +76,11 @@ Test the local `pi-gcp` mixin together with the published Pi workload:
 sbx run \
   docker.io/docker/sbx-kit-pi:latest \
   --kit ./kits/pi-gcp \
-  --kit-arg pi-gcp.project=<your-gcp-project> \
+  --kit ./kits/pi-version \
+  --kit docker.io/docker/sbx-kit-github-ssh:1.0.0 \
+  --kit docker.io/docker/sbx-kit-git-ssh-sign:1.0.0 \
+  --kit-arg project=dcp-sandbox-pub-dev-d160 \
+  --kit-arg version=1.4.0 \
   .
 ```
 
