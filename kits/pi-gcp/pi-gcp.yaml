@@ -94,8 +94,145 @@ capabilities:
                       "cost": {"input": 0.6, "output": 2.5, "cacheRead": 0.06, "cacheWrite": 0.6}
                     }
                   ]
+                },
+                "gcp-anthropic": {
+                  "baseUrl": "https://aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.location }}/publishers/anthropic",
+                  "api": "anthropic-messages",
+                  "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
+                  "authHeader": true,
+                  "compat": {
+                    "supportsStrictTools": false
+                  },
+                  "models": [
+                    {
+                      "id": "claude-opus-5-5",
+                      "name": "Claude Opus 5.5 (Agent Platform)",
+                      "reasoning": true,
+                      "thinkingLevelMap": {
+                        "off": null,
+                        "minimal": null,
+                        "low": "low",
+                        "medium": "medium",
+                        "high": "high",
+                        "xhigh": "xhigh",
+                        "max": "max"
+                      },
+                      "input": ["text", "image"],
+                      "contextWindow": 1000000,
+                      "maxTokens": 128000,
+                      "compat": {
+                        "supportsMidConvoEffort": true,
+                        "supportsMidConvoSystemMessages": true,
+                        "supportsMidConvoToolChanges": true,
+                        "forceAdaptiveThinking": true,
+                        "supportsTemperature": false
+                      },
+                      "cost": {"input": 4, "output": 20, "cacheRead": 0.2, "cacheWrite": 5}
+                    },
+                    {
+                      "id": "claude-sonnet-5-5",
+                      "name": "Claude Sonnet 5.5 (Agent Platform)",
+                      "reasoning": true,
+                      "thinkingLevelMap": {
+                        "off": null,
+                        "minimal": null,
+                        "low": "low",
+                        "medium": "medium",
+                        "high": "high",
+                        "xhigh": "xhigh",
+                        "max": "max"
+                      },
+                      "input": ["text", "image"],
+                      "contextWindow": 1000000,
+                      "maxTokens": 128000,
+                      "compat": {
+                        "supportsMidConvoEffort": true,
+                        "supportsMidConvoSystemMessages": true,
+                        "supportsMidConvoToolChanges": true,
+                        "forceAdaptiveThinking": true,
+                        "supportsTemperature": false
+                      },
+                      "cost": {"input": 2, "output": 10, "cacheRead": 0.1, "cacheWrite": 2.5}
+                    },
+                    {
+                      "id": "claude-haiku-5-5",
+                      "name": "Claude Haiku 5.5 (Agent Platform)",
+                      "reasoning": true,
+                      "thinkingLevelMap": {
+                        "minimal": null,
+                        "low": "low",
+                        "medium": "medium",
+                        "high": "high",
+                        "xhigh": "xhigh",
+                        "max": "max"
+                      },
+                      "input": ["text", "image"],
+                      "contextWindow": 1000000,
+                      "maxTokens": 128000,
+                      "compat": {
+                        "supportsMidConvoEffort": true,
+                        "supportsMidConvoSystemMessages": true,
+                        "supportsMidConvoToolChanges": true,
+                        "forceAdaptiveThinking": true,
+                        "supportsTemperature": false
+                      },
+                      "cost": {
+                        "input": 0.1,
+                        "output": 0.5,
+                        "cacheRead": 0.01,
+                        "cacheWrite": 0.125,
+                        "tiers": [
+                          {"inputTokensAbove": 100000, "input": 0.5, "output": 2.5, "cacheRead": 0.05, "cacheWrite": 0.625}
+                        ]
+                      }
+                    }
+                  ]
                 }
               }
+            }
+
+        - path: /home/agent/.pi/agent/extensions/gcp-anthropic.ts
+          mode: "0644"
+          overwrite: false
+          content: |
+            import { getApiProvider } from "@earendil-works/pi-ai/compat";
+            import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+
+            export default function (pi: ExtensionAPI) {
+              const anthropicApi = getApiProvider("anthropic-messages");
+              if (!anthropicApi) return;
+
+              pi.registerProvider("gcp-anthropic", {
+                api: "anthropic-messages",
+                streamSimple: (model, context, options) => {
+                  const baseFetch = options?.fetch ?? globalThis.fetch;
+                  const vertexFetch: typeof fetch = async (input, init) => {
+                    const rawUrl =
+                      typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+                    const url = new URL(rawUrl);
+                    const body = typeof init?.body === "string" ? JSON.parse(init.body) : undefined;
+                    const modelId = body?.model ?? model.id;
+                    if (body) {
+                      delete body.model;
+                      delete body.fallbacks;
+                      body.anthropic_version ??= "vertex-2023-10-16";
+                    }
+                    const specifier = body?.stream ? "streamRawPredict" : "rawPredict";
+                    url.pathname = url.pathname.replace(/\/v1\/messages$/, `/models/${modelId}:${specifier}`);
+                    url.searchParams.delete("beta");
+                    return baseFetch(url.toString(), {
+                      ...init,
+                      body: body ? JSON.stringify(body) : init?.body,
+                    });
+                  };
+
+                  return anthropicApi.streamSimple(model, context, {
+                    ...options,
+                    apiKey: undefined,
+                    fetch: vertexFetch,
+                  });
+                },
+              });
             }
 
   # --------------------------------------
