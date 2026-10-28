@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.2.1...pi-gcp-sandbox-kit-v0.3.0) (2026-10-28)
+
+
+### Features
+
+* adding support for Anthropic models on Agent Platform in GCP ([d5d6c5d](https://github.com/ChristianGroentved/sandbox-kits/commit/d5d6c5d060a3a4f66908017534f82b5f18d517e4))
+
 ## [0.2.1](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.2.0...pi-gcp-sandbox-kit-v0.2.1) (2026-10-25)
 
 
