@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.3.1...pi-gcp-sandbox-kit-v0.4.0) (2026-10-29)
+
+
+### Features
+
+* add Gemini models and remove redundant git-ssh-sign kit ([fc93fd6](https://github.com/ChristianGroentved/sandbox-kits/commit/fc93fd619874645f06baf25ad9e114927304e76f))
+* add Gemini models and remove redundant git-ssh-sign kit ([b7c1edd](https://github.com/ChristianGroentved/sandbox-kits/commit/b7c1eddf154682dc36c89c9115b68941501379e6))
+
 ## [0.3.1](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.3.0...pi-gcp-sandbox-kit-v0.3.1) (2026-10-29)
 
 
