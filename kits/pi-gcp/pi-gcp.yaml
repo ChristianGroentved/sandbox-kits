@@ -6,7 +6,7 @@ kind: mixin
 
 displayName: Pi GCP Models
 description: Adds GCP-hosted models to Pi through Agent Platform AI
-version: "0.3.0" # x-release-please-version
+version: "0.3.1" # x-release-please-version
 
 args:
   project:

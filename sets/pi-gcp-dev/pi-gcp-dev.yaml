@@ -3,7 +3,7 @@ schemaVersion: "3"
 
 kind: set
 displayName: Pi GCP Development Environment
-version: "0.3.0" # x-release-please-version
+version: "0.3.1" # x-release-please-version
 
 args:
   project:
@@ -22,11 +22,11 @@ args:
 kits:
   - ref: docker.io/docker/sbx-kit-pi:latest
 
-  - ref: docker.io/christianhkb/sbx-kit-pi-version:0.3.0 # x-release-please-version
+  - ref: docker.io/christianhkb/sbx-kit-pi-version:0.3.1 # x-release-please-version
     args:
       version: "${{ kit.args.version }}"
 
-  - ref: docker.io/christianhkb/sbx-kit-pi-gcp:0.3.0 # x-release-please-version
+  - ref: docker.io/christianhkb/sbx-kit-pi-gcp:0.3.1 # x-release-please-version
     args:
       project: "${{ kit.args.project }}"
       location: "${{ kit.args.location }}"

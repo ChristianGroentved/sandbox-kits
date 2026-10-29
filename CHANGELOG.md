@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.3.0...pi-gcp-sandbox-kit-v0.3.1) (2026-10-29)
+
+
+### Bug Fixes
+
+* Fixed the sandbox couldn't start up ([01f3683](https://github.com/ChristianGroentved/sandbox-kits/commit/01f36831722815ba96cf1422e0804489450eb95a))
+
 ## [0.3.0](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.2.1...pi-gcp-sandbox-kit-v0.3.0) (2026-10-28)
 
 
