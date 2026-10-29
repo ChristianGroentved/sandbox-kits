@@ -70,7 +70,8 @@ Changes that affect runtime behavior — especially `models.json`, provider conf
 
 ### Runtime verification
 
-Test the local `pi-gcp` mixin together with the published Pi workload:
+Test the local `pi-gcp` mixin together with the published Pi workload and the
+official GitHub SSH kit:
 
 ```bash
 sbx run \
