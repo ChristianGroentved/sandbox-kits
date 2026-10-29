@@ -32,5 +32,3 @@ kits:
       location: "${{ kit.args.location }}"
 
   - ref: docker.io/docker/sbx-kit-github-ssh:1.0.0
-
-  - ref: docker.io/docker/sbx-kit-git-ssh-sign:1.0.0

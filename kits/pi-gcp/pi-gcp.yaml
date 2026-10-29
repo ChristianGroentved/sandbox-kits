@@ -187,8 +187,22 @@ capabilities:
                       }
                     }
                   ]
+                },
+                "google-vertex": {
+                  "baseUrl": "https://aiplatform.googleapis.com/v1/projects/${{ kit.args.project }}/locations/${{ kit.args.location }}",
+                  "apiKey": "$GCP_VERTEX_ACCESS_TOKEN",
+                  "authHeader": true
                 }
               }
+            }
+
+        - path: /home/agent/.pi/agent/settings.json
+          mode: "0644"
+          overwrite: false
+          content: |
+            {
+              "defaultProvider": "gcp-anthropic",
+              "defaultModel": "claude-haiku-5-5"
             }
 
         - path: /home/agent/.pi/agent/extensions/gcp-anthropic.ts

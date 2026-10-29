@@ -14,6 +14,8 @@ Provides:
 
 - Qwen
 - GLM
+- Claude
+- Gemini
 - Vertex AI authentication
 - Vertex AI network access
 
@@ -79,7 +81,6 @@ sbx run \
   --kit ./kits/pi-gcp \
   --kit ./kits/pi-version \
   --kit docker.io/docker/sbx-kit-github-ssh:1.0.0 \
-  --kit docker.io/docker/sbx-kit-git-ssh-sign:1.0.0 \
   --kit-arg project=dcp-sandbox-pub-dev-d160 \
   --kit-arg version=1.4.0 \
   .
