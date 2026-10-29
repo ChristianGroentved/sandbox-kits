@@ -263,18 +263,3 @@ capabilities:
           - domain: aiplatform.googleapis.com
             header: Authorization
             format: "Bearer %s"
-
-  # --------------------------------------
-  # SSH workaround
-  # --------------------------------------
-
-  - type: com.docker.sandbox/git-identity@1
-
-  - type: com.docker.sandbox/ssh-agent@1
-    config:
-      phase: runtime
-      unrestricted: false
-      sign:
-        - git
-      authenticate:
-        - github.com
