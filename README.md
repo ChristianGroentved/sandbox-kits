@@ -18,6 +18,7 @@ Provides:
 - Gemini
 - Vertex AI authentication
 - Vertex AI network access
+- Host agent skills (`/home/agent/.agents/skills`)
 
 ### Authentication
 
@@ -32,6 +33,12 @@ Register the dynamic sandbox secret:
 
 The access token is resolved on the host and is never exposed
 inside the sandbox.
+
+### Skills
+
+Import global host skills (from `~/.agents/skills`, `~/.claude/skills`, etc.) into the Docker Sandboxes skills store:
+
+    sbx skills import
 
 ## Pi Version
 

@@ -277,3 +277,12 @@ capabilities:
           - domain: aiplatform.googleapis.com
             header: Authorization
             format: "Bearer %s"
+
+  # --------------------------------------
+  # Agent skills
+  # --------------------------------------
+
+  - type: com.docker.sandbox/agent-skills@1
+    optional: true
+    config:
+      path: /home/agent/.agents/skills
