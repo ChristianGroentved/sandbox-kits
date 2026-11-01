@@ -19,6 +19,7 @@ Provides:
 - Vertex AI authentication
 - Vertex AI network access
 - Host agent skills (`/home/agent/.agents/skills`)
+- Host Git author identity (`user.name` and `user.email`)
 
 ### Authentication
 

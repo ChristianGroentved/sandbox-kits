@@ -279,10 +279,12 @@ capabilities:
             format: "Bearer %s"
 
   # --------------------------------------
-  # Agent skills
+  # Agent skills & Git identity
   # --------------------------------------
 
   - type: com.docker.sandbox/agent-skills@1
     optional: true
     config:
       path: /home/agent/.agents/skills
+
+  - type: com.docker.sandbox/git-identity@1
