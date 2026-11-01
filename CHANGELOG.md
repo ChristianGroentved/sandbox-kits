@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.4.0...pi-gcp-sandbox-kit-v0.5.0) (2026-11-01)
+
+
+### Features
+
+* injecting skills ([b9fa8e1](https://github.com/ChristianGroentved/sandbox-kits/commit/b9fa8e1e4907f1eb5c276f3766f78361d589f821))
+
 ## [0.4.0](https://github.com/ChristianGroentved/sandbox-kits/compare/pi-gcp-sandbox-kit-v0.3.1...pi-gcp-sandbox-kit-v0.4.0) (2026-10-29)
 
 
