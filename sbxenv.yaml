@@ -5,7 +5,7 @@ name: pi-gcp-dev
 agent: pi
 
 kits:
-  - source: ./kits/pi
+  - source: docker.io/sbx/pi:latest
 
   - source: ./kits/pi-gcp
     args:
