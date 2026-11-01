@@ -18,7 +18,6 @@ Provides:
 - Gemini
 - Vertex AI authentication
 - Vertex AI network access
-- Host agent skills (`/home/agent/.agents/skills`)
 - Host Git author identity (`user.name` and `user.email`)
 
 ### Authentication
@@ -85,7 +84,7 @@ official GitHub SSH kit:
 
 ```bash
 sbx run \
-  docker.io/docker/sbx-kit-pi:latest \
+  docker.io/sbx/pi:latest \
   --kit ./kits/pi-gcp \
   --kit ./kits/pi-version \
   --kit docker.io/docker/sbx-kit-github-ssh:1.0.0 \

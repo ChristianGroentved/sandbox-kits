@@ -20,7 +20,7 @@ args:
     description: Pi release to install (e.g. 1.1.0, or latest)
 
 kits:
-  - ref: docker.io/docker/sbx-kit-pi:latest
+  - ref: docker.io/sbx/pi:latest
 
   - ref: docker.io/christianhkb/sbx-kit-pi-version:0.4.0 # x-release-please-version
     args:
